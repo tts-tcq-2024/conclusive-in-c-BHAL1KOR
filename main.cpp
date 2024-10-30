@@ -15,4 +15,7 @@ void CheckAndTemperatureBreachCheckAndAlert(CoolingType coolingType, double temp
     void (*alertFunction)(BreachType) = hasController ? SendToController : SendToEmail;
     alertFunction(breachType);
   }
+    else{
+        printf("");
+    }
 }
