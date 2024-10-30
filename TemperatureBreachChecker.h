@@ -19,7 +19,7 @@ typedef enum {
 typedef struct {
     double lowLimit;
     double highLimit;
-} CoolingTypeLimits;
+} CoolingTypeLimit;
 
 typedef enum {
   NORMAL,
