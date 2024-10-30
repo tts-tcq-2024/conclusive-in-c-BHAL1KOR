@@ -18,9 +18,6 @@ enable_testing()
 add_compile_options("--coverage")
 add_executable(
   cleancode
-  main.c
-  TemperatureBreachChecker.c
-  TemperatureBreachAlerter.c
   BatteryTemperatureMonitorTests.cpp
 )
 target_link_libraries(
