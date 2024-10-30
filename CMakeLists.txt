@@ -16,10 +16,11 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 add_compile_options("--coverage")
-add_executable(
-  cleancode
-  typewise-alert.cpp
-  typewise-alert.tests.cpp
+add_executable(cleancode
+    main.cpp
+    TemperatureBreachChecker.cpp
+    TemperatureBreachAlerter.cpp
+    BatteryTemperatureMonitorTests.cpp
 )
 target_link_libraries(
   cleancode
