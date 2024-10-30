@@ -28,7 +28,7 @@ void RunTestCases(bool hasController, CoolingType coolingType) {
     std::string tooLowAlertStr = GetAlertMessage(hasController, true);
     std::string tooHighAlertStr = GetAlertMessage(hasController, false);
 
-    TestBreachCheckAndAlert(hasController, coolingType, coolingTypeLimits[coolingType].highLimit, NULL); // Normal
+    TestBreachCheckAndAlert(hasController, coolingType, coolingTypeLimits[coolingType].highLimit, nullptr); // Normal
     TestBreachCheckAndAlert(hasController, coolingType, coolingTypeLimits[coolingType].lowLimit - 1, tooLowAlertStr ); // TooLow
     TestBreachCheckAndAlert(hasController, coolingType, coolingTypeLimits[coolingType].highLimit + 1, tooHighAlertStr); // TooHigh
 }
