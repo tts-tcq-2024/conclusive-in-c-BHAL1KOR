@@ -1,11 +1,10 @@
 #include "TemperatureBreachChecker.h"
 #include "main.h"
-#include <stdio.h>
 
-CoolingTypeLimit coolingTypeLimits[NUM_COOLING_TYPES] = {
-    {(double)PASSIVE_COOLING_LOW, (double)PASSIVE_COOLING_HIGH},  // PASSIVE_COOLING
-    {(double)HI_ACTIVE_COOLING_LOW, (double)HI_ACTIVE_COOLING_HIGH},  // HI_ACTIVE_COOLING
-    {(double)MED_ACTIVE_COOLING_LOW, (double)MED_ACTIVE_COOLING_HIGH}   // MED_ACTIVE_COOLING
+CoolingTypeLimit coolingTypeLimits[] = {
+    {(double)PASSIVE_COOLING_LOW, (double)PASSIVE_COOLING_HIGH},  
+    {(double)HI_ACTIVE_COOLING_LOW, (double)HI_ACTIVE_COOLING_HIGH},  
+    {(double)MED_ACTIVE_COOLING_LOW, (double)MED_ACTIVE_COOLING_HIGH}   
 };
 
 BreachType ClassifyTemperatureBreach(CoolingType coolingType, double temperatureInC) {
