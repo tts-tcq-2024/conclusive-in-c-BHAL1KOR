@@ -2,6 +2,8 @@
 #include "main.h"
 #include <stdbool.h>
 #include<stdio.h>
+extern CoolingTypeLimit coolingTypeLimits[];
+
 void TestBreachCheckAndAlert(bool hasController, CoolingType coolingType, double temperature, const std::string& expectedOutput) {
     testing::internal::CaptureStdout();
     CheckAndTemperatureBreachCheckAndAlert(coolingType, temperature, hasController);
