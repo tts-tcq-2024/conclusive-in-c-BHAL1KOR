@@ -12,7 +12,7 @@ void TestBreachCheckAndAlert(bool hasController, CoolingType coolingType, double
 
 TEST(TemperatureBreach, Alerts) {
     for (bool hasController : {true, false}) {
-        for (CoolingType coolingType = PASSIVE_COOLING; coolingType <= MED_ACTIVE_COOLING; ++coolingType) {
+        for (CoolingType coolingType = PASSIVE_COOLING; coolingType <= MED_ACTIVE_COOLING; coolingType = (CoolingType)(coolingType + 1)) {
             const char* tooLowAlert = hasController ? "feed : 1\n" : "To: a.b@c.com\nHi, the temperature is too low\n";
             const char* tooHighAlert = hasController ? "feed : 2\n" : "To: a.b@c.com\nHi, the temperature is too high\n";
 
