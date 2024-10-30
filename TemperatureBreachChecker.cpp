@@ -6,7 +6,6 @@ BreachType InferBreach(double value, int lowerLimit, int upperLimit) {
 }
 
 BreachType ClassifyTemperatureBreach(CoolingType coolingType, double temperatureInC) {
-  printf("Here got %d, %d", coolingType,temperatureInC);
   for (CoolingType coolingType = PASSIVE_COOLING; coolingType <= MED_ACTIVE_COOLING; coolingType = (CoolingType)(coolingType + 1)) {
     return InferBreach(temperatureInC, coolingTypeLimits[coolingType].lowLimit, coolingTypeLimits[coolingType].highLimit);
   }
