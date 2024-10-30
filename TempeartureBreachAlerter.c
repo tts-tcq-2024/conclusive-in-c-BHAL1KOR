@@ -13,7 +13,6 @@ void SendEmailAlert(const char* recepient, const char* message) {
   printf("%s\n", message);
 }
 
-
 void SendToEmail(BreachType breachType) {
   const char* recepient = TO_EMAIL;
   const char* message = NULL;
