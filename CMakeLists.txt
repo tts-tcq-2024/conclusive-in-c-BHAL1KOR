@@ -18,8 +18,10 @@ enable_testing()
 add_compile_options("--coverage")
 add_executable(
   cleancode
-  typewise-alert.cpp
-  typewise-alert.tests.cpp
+  main.c
+  TemperatureBreachChecker.c
+  TempeartureBreachAlerter.c
+  BatteryTemperatureMonitorTests.c
 )
 target_link_libraries(
   cleancode
