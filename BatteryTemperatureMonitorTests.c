@@ -1,6 +1,5 @@
 #include "TemperatureBreachChecker.h"
 #include "TemperatureBreachAlerter.h"
-#include <gtest/gtest.h>
 #include <stdbool.h>
 
 void TestBreachCheckAndAlert(bool hasController, CoolingType coolingType, double temperature, const std::string& expectedOutput) {
