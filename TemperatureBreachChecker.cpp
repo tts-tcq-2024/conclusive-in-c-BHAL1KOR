@@ -10,8 +10,6 @@ CoolingTypeLimit coolingTypeLimits[NUM_COOLING_TYPES] = {
 
 BreachType ClassifyTemperatureBreach(CoolingType coolingType, double temperatureInC) {
    printf("cooling type = %d, coolingTypeLimits[coolingType].highLimit= %f", coolingType,coolingTypeLimits[coolingType].highLimit);
-    printf("Comparing to %f, expe%f ",lowerLimit, value);
-  printf("Comparing to h %f, expe%f ",upperLimit, value);
   return (temperatureInC < coolingTypeLimits[coolingType].lowLimit) ? TOO_LOW : (temperatureInC > coolingTypeLimits[coolingType].highLimit) ? TOO_HIGH : NORMAL;
   
 }
