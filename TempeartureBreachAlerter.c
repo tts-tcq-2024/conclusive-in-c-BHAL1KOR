@@ -8,16 +8,20 @@ void SendToController(BreachType breachType) {
   printf("%x : %x\n", TO_CONTROLLER, breachType);
 }
 
+void SendEmailAlert(const char* recepient, const char* message) {
+  printf("To: %s\n", recepient);
+  printf("%s\n", message);
+}
+
+
 void SendToEmail(BreachType breachType) {
   const char* recepient = TO_EMAIL;
-  switch(breachType) {
-    case TooLow:
-      printf("To: %s\nHi, the temperature is too low\n", recepient);
-      break;
-    case TooHigh:
-      printf("To: %s\nHi, the temperature is too high\n", recepient);
-      break;
-    case Normal:
-      break;
+  const char* message = NULL;
+
+  if (breachType == TOO_LOW) {
+    message = "the temperature is too low";
+  } else {
+    message = "the temperature is too high";
   }
+  SendEmailAlert(recepient, message);
 }
