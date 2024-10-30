@@ -20,7 +20,7 @@ add_executable(
   cleancode
   main.c
   TemperatureBreachChecker.c
-  TempeartureBreachAlerter.c
+  TemperatureBreachAlerter.c
   BatteryTemperatureMonitorTests.c
 )
 target_link_libraries(
