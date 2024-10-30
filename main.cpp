@@ -12,6 +12,6 @@ void CheckAndTemperatureBreachCheckAndAlert(CoolingType coolingType, double temp
     alertFunction(breachType);
   }
     else{
-        printf("else case");
+        printf("");
     }
 }
