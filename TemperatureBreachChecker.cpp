@@ -2,10 +2,10 @@
 #include "main.h"
 #include <stdio.h>
 
-CoolingTypeLimits coolingTypeLimits[] = {
-    { PASSIVE_COOLING_LOW, PASSIVE_COOLING_HIGH},
-    { HI_ACTIVE_COOLING_LOW, HI_ACTIVE_COOLING_HIGH},
-    { MED_ACTIVE_COOLING_LOW, MED_ACTIVE_COOLING_HIGH}
+CoolingTypeLimit coolingTypeLimits[NUM_COOLING_TYPES] = {
+    {(double)PASSIVE_COOLING_LOW, (double)PASSIVE_COOLING_HIGH},  // PASSIVE_COOLING
+    {(double)HI_ACTIVE_COOLING_LOW, (double)HI_ACTIVE_COOLING_HIGH},  // HI_ACTIVE_COOLING
+    {(double)MED_ACTIVE_COOLING_LOW, (double)MED_ACTIVE_COOLING_HIGH}   // MED_ACTIVE_COOLING
 };
 
 BreachType InferBreach(double value, double lowerLimit, double upperLimit) {
