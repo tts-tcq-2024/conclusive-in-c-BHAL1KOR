@@ -1,18 +1,39 @@
-#ifndef TEMPERATURE_BREACH_H
-#define TEMPERATURE_BREACH_H
+#ifndef TEMPERATURE_BREACH_CHECKER_H
+#define TEMPERATURE_BREACH_CHECKER_H
+
+#define PASSIVE_COOLING_LOW 0
+#define PASSIVE_COOLING_HIGH 35
+
+#define HI_ACTIVE_COOLING_LOW 0
+#define HI_ACTIVE_COOLING_HIGH 45
+
+#define MED_ACTIVE_COOLING_LOW 0
+#define MED_ACTIVE_COOLING_HIGH 40
 
 typedef enum {
-  PassiveCooling,
-  HiActiveCooling,
-  MedActiveCooling
+    PASSIVE_COOLING,
+    HI_ACTIVE_COOLING,
+    MED_ACTIVE_COOLING
 } CoolingType;
 
+typedef struct {
+    CoolingType type;
+    int lowLimit;
+    int highLimit;
+} CoolingTypeLimits;
+
 typedef enum {
-  Normal,
-  TooLow,
-  TooHigh
+  NORMAL,
+  TOO_LOW,
+  TOO_HIGH
 } BreachType;
 
-BreachType ClassifyTemperatureBreach(CoolingType coolingType, double temperatureInC);
+CoolingTypeLimits coolingTypeLimits[] = {
+    {PASSIVE_COOLING, PASSIVE_COOLING_LOW, PASSIVE_COOLING_HIGH},
+    {HI_ACTIVE_COOLING, HI_ACTIVE_COOLING_LOW, HI_ACTIVE_COOLING_HIGH},
+    {MED_ACTIVE_COOLING, MED_ACTIVE_COOLING_LOW, MED_ACTIVE_COOLING_HIGH}
+};
 
-#endif // TEMPERATURE_BREACH_H
+void CheckAndTemperatureBreachCheckAndAlert(CoolingType coolingType, double temperature, int isControllerAlert);
+
+#endif // TEMPERATURE_BREACH_CHECKER_H
