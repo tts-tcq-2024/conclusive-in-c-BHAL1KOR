@@ -1,9 +1,9 @@
 #include "TemperatureBreachChecker.h"
 #include "main.h"
 #include <stdio.h>
-BreachType InferBreach(double value, int lowerLimit, int upperLimit) {
-  printf("Comparing to %d, expe%d",lowerLimit, value);
-  printf("Comparing to h %d, expe%d",upperLimit, value);
+BreachType InferBreach(double value, double lowerLimit, double upperLimit) {
+  printf("Comparing to %f, expe%f ",lowerLimit, value);
+  printf("Comparing to h %f, expe%f ",upperLimit, value);
   return (value < lowerLimit) ? TOO_LOW : (value > upperLimit) ? TOO_HIGH : NORMAL;
 }
 
