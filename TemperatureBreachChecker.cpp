@@ -8,17 +8,10 @@ CoolingTypeLimit coolingTypeLimits[NUM_COOLING_TYPES] = {
     {(double)MED_ACTIVE_COOLING_LOW, (double)MED_ACTIVE_COOLING_HIGH}   // MED_ACTIVE_COOLING
 };
 
-BreachType InferBreach(double value, double lowerLimit, double upperLimit) {
-  printf("Comparing to %f, expe%f ",lowerLimit, value);
-  printf("Comparing to h %f, expe%f ",upperLimit, value);
-  return (value < lowerLimit) ? TOO_LOW : (value > upperLimit) ? TOO_HIGH : NORMAL;
-}
-
 BreachType ClassifyTemperatureBreach(CoolingType coolingType, double temperatureInC) {
-    for (CoolingType coolingType = PASSIVE_COOLING; coolingType <= MED_ACTIVE_COOLING; coolingType = (CoolingType)(coolingType + 1)) {
-      printf("cooling type = %d, coolingTypeLimits[coolingType].highLimit= %f", coolingType,coolingTypeLimits[coolingType].highLimit);
-    return InferBreach(temperatureInC, coolingTypeLimits[coolingType].lowLimit, coolingTypeLimits[coolingType].highLimit);
-  }
-  // Handle unexpected coolingType value
-  return NORMAL;
+   printf("cooling type = %d, coolingTypeLimits[coolingType].highLimit= %f", coolingType,coolingTypeLimits[coolingType].highLimit);
+    printf("Comparing to %f, expe%f ",lowerLimit, value);
+  printf("Comparing to h %f, expe%f ",upperLimit, value);
+  return (temperatureInC < coolingTypeLimits[coolingType].lowLimit) ? TOO_LOW : (temperatureInC > coolingTypeLimits[coolingType].highLimit) ? TOO_HIGH : NORMAL;
+  
 }
