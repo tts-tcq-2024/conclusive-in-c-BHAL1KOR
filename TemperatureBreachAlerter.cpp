@@ -18,9 +18,9 @@ void SendToEmail(BreachType breachType) {
   const char* message = NULL;
 
   if (breachType == TOO_LOW) {
-    message = "the temperature is too low";
+    message = "Hi, the temperature is too low";
   } else {
-    message = "the temperature is too high";
+    message = "Hi, the temperature is too high";
   }
   SendEmailAlert(recepient, message);
 }
