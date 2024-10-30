@@ -6,9 +6,9 @@ BreachType InferBreach(double value, int lowerLimit, int upperLimit) {
 }
 
 BreachType ClassifyTemperatureBreach(CoolingType coolingType, double temperatureInC) {
-    for (int i = 0; i < sizeof(coolingTypeLimits) / sizeof(coolingTypeLimits[0]); ++i) {
-        if (coolingTypeLimits[i].type == coolingType) {
-      return InferBreach(temperatureInC, coolingTypeLimits[i].lowLimit, coolingTypeLimits[i].highLimit);
+    for (CoolingType coolingType = PASSIVE_COOLING; coolingType <= MED_ACTIVE_COOLING; coolingType = (CoolingType)(coolingType + 1)) {
+        if (coolingTypeLimits[coolingType].type == coolingType) {
+          return InferBreach(temperatureInC, coolingTypeLimits[coolingType].lowLimit, coolingTypeLimits[coolingType].highLimit);
     }
   }
   // Handle unexpected coolingType value
