@@ -9,18 +9,15 @@ void TestBreachCheckAndAlert(bool hasController, CoolingType coolingType, double
     ASSERT_EQ(output, expectedOutput);
 }
 
-TEST(TemperatureBreach, ControllerAlerts) {
-    bool hasController = true;
-    for (CoolingType coolingType = PASSIVE_COOLING; coolingType <= MED_ACTIVE_COOLING; ++coolingType) {
-        TestBreachCheckAndAlert(hasController, coolingType, coolingTypeLimits[coolingType].highLimit, ""); // Normal
-        TestBreachCheckAndAlert(hasController, coolingType, coolingTypeLimits[coolingType].lowLimit - 1, "feed : 1\n"); // TooLow
-        TestBreachCheckAndAlert(hasController, coolingType, coolingTypeLimits[coolingType].highLimit + 1, "feed : 2\n"); // TooHigh
-    }
+TEST(TemperatureBreach, Alerts) {
+    for (bool hasController : {true, false}) {
+        for (CoolingType coolingType = PASSIVE_COOLING; coolingType <= MED_ACTIVE_COOLING; ++coolingType) {
+            std::string tooLowAlert = hasController ? "feed : 1\n" : "To: a.b@c.com\nHi, the temperature is too low\n";
+            std::string tooHighAlert = hasController ? "feed : 2\n" : "To: a.b@c.com\nHi, the temperature is too high\n";
 
-    hasController = false;
-    for (CoolingType coolingType = PASSIVE_COOLING; coolingType <= MED_ACTIVE_COOLING; ++coolingType) {
-        TestBreachCheckAndAlert(hasController, coolingType, coolingTypeLimits[coolingType].highLimit, ""); // Normal
-        TestBreachCheckAndAlert(hasController, coolingType, coolingTypeLimits[coolingType].lowLimit - 1, "To: a.b@c.com\nHi, the temperature is too low\n"); // TooLow
-        TestBreachCheckAndAlert(hasController, coolingType, coolingTypeLimits[coolingType].highLimit + 1, "To: a.b@c.com\nHi, the temperature is too high\n"); // TooHigh
+            TestBreachCheckAndAlert(hasController, coolingType, coolingTypeLimits[coolingType].highLimit, ""); // Normal
+            TestBreachCheckAndAlert(hasController, coolingType, coolingTypeLimits[coolingType].lowLimit - 1, tooLowAlert); // TooLow
+            TestBreachCheckAndAlert(hasController, coolingType, coolingTypeLimits[coolingType].highLimit + 1, tooHighAlert); // TooHigh
+        }
     }
 }
