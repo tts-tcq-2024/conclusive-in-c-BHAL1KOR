@@ -1,4 +1,5 @@
 #include "TemperatureBreachChecker.h"
+#include "main.h"
 
 BreachType InferBreach(double value, int lowerLimit, int upperLimit) {
   return (value < lowerLimit) ? TOO_LOW : (value > upperLimit) ? TOO_HIGH : NORMAL;
