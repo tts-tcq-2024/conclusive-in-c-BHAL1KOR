@@ -11,11 +11,8 @@ CoolingTypeLimits coolingTypeLimits[] = {
 
 void CheckAndTemperatureBreachCheckAndAlert(CoolingType coolingType, double temperatureInC, bool hasController) {
   BreachType breachType = ClassifyTemperatureBreach(coolingType, temperatureInC);
-    printf("in main %d", breachType);
-  void (*alertFunction)(BreachType) = hasController ? SendToController : SendToEmail;
-
-  if (breachType != NORMAL) {
-      printf("Entered\n");
+   if (breachType != NORMAL) {
+    void (*alertFunction)(BreachType) = hasController ? SendToController : SendToEmail;
     alertFunction(breachType);
   }
 }
