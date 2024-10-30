@@ -29,8 +29,8 @@ void RunTestCases(bool hasController, CoolingType coolingType) {
      printf("tooLowAlertStr = %s", tooLowAlertStr);
     printf("tooHighAlertStr = %s", tooHighAlertStr);
     TestBreachCheckAndAlert(hasController, coolingType, coolingTypeLimits[coolingType].highLimit, ""); // Normal
-    TestBreachCheckAndAlert(hasController, coolingType, coolingTypeLimits[coolingType].lowLimit - 1, tooLowAlert); // TooLow
-    TestBreachCheckAndAlert(hasController, coolingType, coolingTypeLimits[coolingType].highLimit + 1, tooHighAlert); // TooHigh
+    TestBreachCheckAndAlert(hasController, coolingType, coolingTypeLimits[coolingType].lowLimit - 1, tooLowAlertStr ); // TooLow
+    TestBreachCheckAndAlert(hasController, coolingType, coolingTypeLimits[coolingType].highLimit + 1, tooHighAlertStr); // TooHigh
 }
 
 TEST(TemperatureBreach, Alerts) {
