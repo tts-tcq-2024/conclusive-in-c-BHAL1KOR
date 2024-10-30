@@ -1,3 +1,4 @@
+#include <gtest/gtest.h>
 #include "TemperatureBreachChecker.h"
 #include "TemperatureBreachAlerter.h"
 #include <stdbool.h>
