@@ -1,5 +1,5 @@
-#include "TemperatureBreach.h"
-#include "alert.h"
+#include "TemperatureBreachChecker.h"
+#include "TemperatureBreachAlerter.h"
 #include <gtest/gtest.h>
 
 TEST(TemperatureBreach, InfersBreachAsPerLimits) {
