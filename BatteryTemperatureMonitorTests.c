@@ -27,3 +27,17 @@ TEST(Alert, SendsToEmail) {
   std::string output = testing::internal::GetCapturedStdout();
   ASSERT_EQ(output, "To: a.b@c.com\nHi, the temperature is too low\n");
 }
+
+TEST(Main, CheckAndAlertWithController) {
+  testing::internal::CaptureStdout();
+  CheckAndAlert(PassiveCooling, 50, true);
+  std::string output = testing::internal::GetCapturedStdout();
+  ASSERT_EQ(output, "feed : 2\n");
+}
+
+TEST(Main, CheckAndAlertWithoutController) {
+  testing::internal::CaptureStdout();
+  CheckAndAlert(HiActiveCooling, 50, false);
+  std::string output = testing::internal::GetCapturedStdout();
+  ASSERT_EQ(output, "To: a.b@c.com\nHi, the temperature is too high\n");
+}
