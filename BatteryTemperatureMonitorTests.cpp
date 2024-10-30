@@ -9,12 +9,20 @@ void TestBreachCheckAndAlert(bool hasController, CoolingType coolingType, double
     ASSERT_EQ(output, expectedOutput);
 }
 
-std::string GetAlertMessage(bool hasController, bool isTooLow) {
-    return hasController 
-        ? (isTooLow ? "feed : 1\n" : "feed : 2\n") 
-        : (isTooLow ? "To: a.b@c.com\nHi, the temperature is too low\n" : "To: a.b@c.com\nHi, the temperature is too high\n");
+// Helper function to generate controller message
+std::string GetControllerMessage(bool isTooLow) {
+    return isTooLow ? "feed : 1\n" : "feed : 2\n";
 }
 
+// Helper function to generate email message
+std::string GetEmailMessage(bool isTooLow) {
+    return isTooLow ? "To: a.b@c.com\nHi, the temperature is too low\n" : "To: a.b@c.com\nHi, the temperature is too high\n";
+}
+
+// Main function to get alert message
+std::string GetAlertMessage(bool hasController, bool isTooLow) {
+    return hasController ? GetControllerMessage(isTooLow) : GetEmailMessage(isTooLow);
+}
 void RunTestCases(bool hasController, CoolingType coolingType) {
     const char* tooLowAlert = GetAlertMessage(hasController, true).c_str();
     const char* tooHighAlert = GetAlertMessage(hasController, false).c_str();
