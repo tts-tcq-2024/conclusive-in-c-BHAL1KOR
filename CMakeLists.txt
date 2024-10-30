@@ -21,7 +21,7 @@ add_executable(
   main.c
   TemperatureBreachChecker.c
   TemperatureBreachAlerter.c
-  BatteryTemperatureMonitorTests.c
+  BatteryTemperatureMonitorTests.cpp
 )
 target_link_libraries(
   cleancode
