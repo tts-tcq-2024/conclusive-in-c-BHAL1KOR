@@ -1,18 +1,11 @@
-#include "TemperatureBreach.h"
-#include "alert.h"
+#include "TemperatureBreachChecker.h"
+#include "TemperatureBreachAlerter.h"
 
-void CheckAndAlert(CoolingType coolingType, double temperatureInC, bool hasController) {
+void CheckAndTemperatureBreachCheckAndAlert(CoolingType coolingType, double temperatureInC, bool hasController) {
   BreachType breachType = ClassifyTemperatureBreach(coolingType, temperatureInC);
-  if (hasController) {
-    SendToController(breachType);
-  } else {
-    SendToEmail(breachType);
-  }
-}
+  void (*alertFunction)(BreachType) = hasController ? SendToController : SendToEmail;
 
-int main() {
-  CheckAndAlert(PassiveCooling, 50, true);
-  CheckAndAlert(HiActiveCooling, 50, false);
-  CheckAndAlert(MedActiveCooling, 50, true);
-  return 0;
+  if (breachType != NORMAL) {
+    alertFunction(breachType);
+  }
 }
