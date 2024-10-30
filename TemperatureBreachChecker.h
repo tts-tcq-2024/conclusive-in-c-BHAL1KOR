@@ -34,6 +34,6 @@ CoolingTypeLimits coolingTypeLimits[] = {
     {MED_ACTIVE_COOLING, MED_ACTIVE_COOLING_LOW, MED_ACTIVE_COOLING_HIGH}
 };
 
-void CheckAndTemperatureBreachCheckAndAlert(CoolingType coolingType, double temperature, int isControllerAlert);
+void ClassifyTemperatureBreach(CoolingType coolingType, double temperature);
 
 #endif // TEMPERATURE_BREACH_CHECKER_H
