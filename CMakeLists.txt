@@ -16,9 +16,11 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 add_compile_options("--coverage")
-add_executable(
-  cleancode
-  BatteryTemperatureMonitorTests.cpp
+add_executable(cleancode
+    main.cpp
+    TemperatureBreachChecker.cpp
+    TemperatureBreachAlerter.cpp
+    BatteryTemperatureMonitorTests.cpp
 )
 target_link_libraries(
   cleancode
