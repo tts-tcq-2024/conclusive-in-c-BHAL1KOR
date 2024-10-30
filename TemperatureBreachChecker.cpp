@@ -1,6 +1,13 @@
 #include "TemperatureBreachChecker.h"
 #include "main.h"
 #include <stdio.h>
+
+CoolingTypeLimits coolingTypeLimits[] = {
+    { PASSIVE_COOLING_LOW, PASSIVE_COOLING_HIGH},
+    { HI_ACTIVE_COOLING_LOW, HI_ACTIVE_COOLING_HIGH},
+    { MED_ACTIVE_COOLING_LOW, MED_ACTIVE_COOLING_HIGH}
+};
+
 BreachType InferBreach(double value, double lowerLimit, double upperLimit) {
   printf("Comparing to %f, expe%f ",lowerLimit, value);
   printf("Comparing to h %f, expe%f ",upperLimit, value);
