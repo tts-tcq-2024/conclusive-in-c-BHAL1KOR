@@ -3,11 +3,15 @@
 #include <stdbool.h>
 extern CoolingTypeLimit coolingTypeLimits[];
 
-void TestBreachCheckAndAlert(bool hasController, CoolingType coolingType, double temperature, const std::string& expectedOutput) {
+void TestBreachCheckAndAlert(bool hasController, CoolingType coolingType, double temperature, const std::string* expectedOutput) {
     testing::internal::CaptureStdout();
     CheckAndTemperatureBreachCheckAndAlert(coolingType, temperature, hasController);
     std::string output = testing::internal::GetCapturedStdout();
-    ASSERT_EQ(output, expectedOutput);
+    if (expectedOutput == nullptr) {
+        ASSERT_TRUE(output.empty());
+    } else {
+        ASSERT_EQ(output, *expectedOutput);
+    }
 }
 
 // Helper function to generate controller message
@@ -24,13 +28,14 @@ std::string GetEmailMessage(bool isTooLow) {
 std::string GetAlertMessage(bool hasController, bool isTooLow) {
     return hasController ? GetControllerMessage(isTooLow) : GetEmailMessage(isTooLow);
 }
+
 void RunTestCases(bool hasController, CoolingType coolingType) {
     std::string tooLowAlertStr = GetAlertMessage(hasController, true);
     std::string tooHighAlertStr = GetAlertMessage(hasController, false);
 
     TestBreachCheckAndAlert(hasController, coolingType, coolingTypeLimits[coolingType].highLimit, nullptr); // Normal
-    TestBreachCheckAndAlert(hasController, coolingType, coolingTypeLimits[coolingType].lowLimit - 1, tooLowAlertStr ); // TooLow
-    TestBreachCheckAndAlert(hasController, coolingType, coolingTypeLimits[coolingType].highLimit + 1, tooHighAlertStr); // TooHigh
+    TestBreachCheckAndAlert(hasController, coolingType, coolingTypeLimits[coolingType].lowLimit - 1, &tooLowAlertStr); // TooLow
+    TestBreachCheckAndAlert(hasController, coolingType, coolingTypeLimits[coolingType].highLimit + 1, &tooHighAlertStr); // TooHigh
 }
 
 TEST(TemperatureBreach, Alerts) {
