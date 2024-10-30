@@ -10,11 +10,9 @@ void TestBreachCheckAndAlert(bool hasController, CoolingType coolingType, double
 }
 
 std::string GetAlertMessage(bool hasController, bool isTooLow) {
-    if (hasController) {
-        return isTooLow ? "feed : 1\n" : "feed : 2\n";
-    } else {
-        return isTooLow ? "To: a.b@c.com\nHi, the temperature is too low\n" : "To: a.b@c.com\nHi, the temperature is too high\n";
-    }
+    return hasController 
+        ? (isTooLow ? "feed : 1\n" : "feed : 2\n") 
+        : (isTooLow ? "To: a.b@c.com\nHi, the temperature is too low\n" : "To: a.b@c.com\nHi, the temperature is too high\n");
 }
 
 void RunTestCases(bool hasController, CoolingType coolingType) {
