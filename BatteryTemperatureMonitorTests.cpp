@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "main.h"
 #include <stdbool.h>
-
+#include<stdio.h>
 void TestBreachCheckAndAlert(bool hasController, CoolingType coolingType, double temperature, const std::string& expectedOutput) {
     testing::internal::CaptureStdout();
     CheckAndTemperatureBreachCheckAndAlert(coolingType, temperature, hasController);
@@ -24,9 +24,10 @@ std::string GetAlertMessage(bool hasController, bool isTooLow) {
     return hasController ? GetControllerMessage(isTooLow) : GetEmailMessage(isTooLow);
 }
 void RunTestCases(bool hasController, CoolingType coolingType) {
-    const char* tooLowAlert = GetAlertMessage(hasController, true).c_str();
-    const char* tooHighAlert = GetAlertMessage(hasController, false).c_str();
-
+    std::string tooLowAlertStr = GetAlertMessage(hasController, true);
+    std::string tooHighAlertStr = GetAlertMessage(hasController, false);
+     printf("tooLowAlertStr = %s", tooLowAlertStr);
+    printf("tooHighAlertStr = %s", tooHighAlertStr);
     TestBreachCheckAndAlert(hasController, coolingType, coolingTypeLimits[coolingType].highLimit, ""); // Normal
     TestBreachCheckAndAlert(hasController, coolingType, coolingTypeLimits[coolingType].lowLimit - 1, tooLowAlert); // TooLow
     TestBreachCheckAndAlert(hasController, coolingType, coolingTypeLimits[coolingType].highLimit + 1, tooHighAlert); // TooHigh
