@@ -1,4 +1,4 @@
-#include "TempeartureBreachAlerter.h"
+#include "TemperatureBreachAlerter.h"
 #include <stdio.h>
 
 const int TO_CONTROLLER = 0xfeed;
