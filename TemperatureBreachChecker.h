@@ -11,10 +11,9 @@
 #define MED_ACTIVE_COOLING_HIGH 40
 
 typedef enum {
-    PASSIVE_COOLING=0,
-    HI_ACTIVE_COOLING=1,
-    MED_ACTIVE_COOLING=2,
-    NUM_COOLING_TYPES=3
+    PASSIVE_COOLING,
+    HI_ACTIVE_COOLING,
+    MED_ACTIVE_COOLING
 } CoolingType;
 
 typedef struct {
