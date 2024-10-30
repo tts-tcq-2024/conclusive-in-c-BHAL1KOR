@@ -17,9 +17,8 @@ typedef enum {
 } CoolingType;
 
 typedef struct {
-    CoolingType type;
-    int lowLimit;
-    int highLimit;
+    double lowLimit;
+    double highLimit;
 } CoolingTypeLimits;
 
 typedef enum {
