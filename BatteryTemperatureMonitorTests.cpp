@@ -9,15 +9,27 @@ void TestBreachCheckAndAlert(bool hasController, CoolingType coolingType, double
     ASSERT_EQ(output, expectedOutput);
 }
 
+std::string GetAlertMessage(bool hasController, bool isTooLow) {
+    if (hasController) {
+        return isTooLow ? "feed : 1\n" : "feed : 2\n";
+    } else {
+        return isTooLow ? "To: a.b@c.com\nHi, the temperature is too low\n" : "To: a.b@c.com\nHi, the temperature is too high\n";
+    }
+}
+
+void RunTestCases(bool hasController, CoolingType coolingType) {
+    const char* tooLowAlert = GetAlertMessage(hasController, true).c_str();
+    const char* tooHighAlert = GetAlertMessage(hasController, false).c_str();
+
+    TestBreachCheckAndAlert(hasController, coolingType, coolingTypeLimits[coolingType].highLimit, ""); // Normal
+    TestBreachCheckAndAlert(hasController, coolingType, coolingTypeLimits[coolingType].lowLimit - 1, tooLowAlert); // TooLow
+    TestBreachCheckAndAlert(hasController, coolingType, coolingTypeLimits[coolingType].highLimit + 1, tooHighAlert); // TooHigh
+}
+
 TEST(TemperatureBreach, Alerts) {
     for (bool hasController : {true, false}) {
         for (CoolingType coolingType = PASSIVE_COOLING; coolingType <= MED_ACTIVE_COOLING; coolingType = (CoolingType)(coolingType + 1)) {
-            const char* tooLowAlert = hasController ? "feed : 1\n" : "To: a.b@c.com\nHi, the temperature is too low\n";
-            const char* tooHighAlert = hasController ? "feed : 2\n" : "To: a.b@c.com\nHi, the temperature is too high\n";
-
-            TestBreachCheckAndAlert(hasController, coolingType, coolingTypeLimits[coolingType].highLimit, ""); // Normal
-            TestBreachCheckAndAlert(hasController, coolingType, coolingTypeLimits[coolingType].lowLimit - 1, tooLowAlert); // TooLow
-            TestBreachCheckAndAlert(hasController, coolingType, coolingTypeLimits[coolingType].highLimit + 1, tooHighAlert); // TooHigh
+            RunTestCases(hasController, coolingType);
         }
     }
 }
